@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Amazon Shopping website</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="style.css" rel="stylesheet" />
+    <script src="home.js"></script>
+    <script
+      src="https://kit.fontawesome.com/07e4ec6fa1.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+      <style>
+          body{
+            background-color:white;
+            color:black
+             }
+          .mydark{
+            background-color:black;
+            color:white;
+            }
+      </style>
+      <script>
+            function changeMode(){
+            let mybody = document.body 
+            mybody.classList.toggle('mydark')
+            }
+      </script>
+  <body>
+  
+<!--Dark and light mode-->  
+          <div id="modebutton">
+            <button onClick="changeMode()">ChangeMode</button>
+          </div>
+
+<!--Coupon code-->  
+        <div id="coupon">
+          <img src="https://i.ibb.co/mtnw48F/Sales.jpg"/>
+            <button onClick="closeCoupon()">&times;</button>
+        </div>
+            <script>
+               window.onload = loadCoupon()
+            </script> 
+            
+<!--Geo location-->
+      <button onClick="geolocation()" id="btnstyle">
+        Get Geo
+    </button>
+    <p id="out"></p>
+    <div id="icon"></div>
+    <img src='https://openweathermap.org/img/w/01d.png'/>
+    <script>
+        let x = document.getElementById('out');
+        function geolocation(){
+            if(navigator.geolocation){
+                navigator.geolocation.getCurrentPosition(showPosition)
+            }else{
+                x.innerText="Geo Not Supported"
+            }
+        }
+        function showPosition(data){
+            console.log(data)
+            sessionStorage.setItem('data',data)
+            // x.innerText=`Latitude is ${data.coords.latitude} & Longitude is ${data.coords.longitude}`
+            let latitude = data.coords.latitude;
+            let longitude = data.coords.longitude
+            const url = `https://api.openweathermap.org/data/2.5/forecast/daily?lat=${latitude}&lon=${longitude}&mode=json&units=metric&cnt=1&appid=fbf712a5a83d7305c3cda4ca8fe7ef29`;
+
+            /// api Calling 
+            fetch(url,{method:'GET'})
+            // return promise
+            .then((res) => res.json())
+            // return data
+            .then((data) => {
+                let cityName = data.city.name
+                let weather = data.list[0].temp.day
+                x.innerText = `Weather of ${cityName} is ${weather} °C`
+                // document.getElementById('icon').appendChild(
+                //      <img src='https://openweathermap.org/img/w/'+data.list[0].weather.icon+'.png'/>
+                // )
+            })
+        }
+    </script>
+
+<!-- Header section -->
+<!-- Nav bar section -->
+
+    <header>
+      <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="https://ibb.co/271RPh0"></a>
+          <img
+            src="https://i.ibb.co/1ftBKQY/Amazon-logo-black-template.webp"
+            style="width: 80px"
+            alt="Amazon-logo-black-template"
+            class="float-start"
+          />
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#mynavbar"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="mynavbar">
+            <ul class="navbar-nav me-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="#">Today's Deal</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Gift Cards</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Coupons</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Gift Cards</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Buy Again</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Gift Ideas</a>
+              </li>
+            </ul>
+            <div id="the-basics">
+              <form class="d-flex">
+                <input
+                  class="form-control me-2 center"
+                  style="width: 500px"
+                  type="text"
+                  placeholder="Search for your products & favorite brands"
+                />
+                <button class="btn btn-primary" type="button">Search</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+<!-- flyer carousel/Category section -->
+    <div
+      id="carouselExampleDark"
+      class="carousel carousel-dark slide"
+      data-bs-ride="carousel"
+    >
+      <div class="carousel-indicators">
+        <button
+          type="button"
+          data-bs-target="#carouselExampleDark"
+          data-bs-slide-to="0"
+          class="active"
+          aria-current="true"
+          aria-label="Slide 1"
+        ></button>
+        <button
+          type="button"
+          data-bs-target="#carouselExampleDark"
+          data-bs-slide-to="1"
+          aria-label="Slide 2"
+        ></button>
+        <button
+          type="button"
+          data-bs-target="#carouselExampleDark"
+          data-bs-slide-to="2"
+          aria-label="Slide 3"
+        ></button>
+        <button
+          type="button"
+          data-bs-target="#carouselExampleDark"
+          data-bs-slide-to="3"
+          aria-label="Slide 4"
+        ></button>
+        <button
+          type="button"
+          data-bs-target="#carouselExampleDark"
+          data-bs-slide-to="4"
+          aria-label="Slide 5"
+        ></button>
+        <button
+          type="button"
+          data-bs-target="#carouselExampleDark"
+          data-bs-slide-to="5"
+          aria-label="Slide 1"
+        ></button>
+      </div>
+      <div class="carousel-inner">
+        <div class="carousel-item active" data-bs-interval="10000">
+          <img
+            src="https://i.ibb.co/n04HsKt/samsung-m21-banner.jpg"
+            class="d-block w-100"
+            style="height: 600px"
+            alt="gadgets"
+          />
+          <div
+            class="carousel-caption d-none d-md-block text-white"
+            id="img-content1"
+          ></div>
+        </div>
+        <div class="carousel-item" data-bs-interval="2000">
+          <img
+            src="https://i.ibb.co/F0SMPwP/g7.jpg"
+            class="d-block w-100"
+            style="height: 600px"
+            alt="gadgets"
+          />
+          <div class="carousel-caption d-none d-md-block text-white" id="img-content1" >
+            <h4 style="color:black;">Gadget World</h2>
+            <p style="color:black;">
+              Offer only 2 days! <b><s>50%</s></b>
+            </p>
+            <div style="color:black;"><pre>75% Off</pre></div>
+          </div>
+        </div>
+        <div class="carousel-item" data-bs-interval="2000">
+          <img
+            src="https://i.ibb.co/0h8ZBMh/mobiles2.jpg"
+            class="d-block w-100"
+            style="height: 600px"
+            alt="Smart phones"
+          />
+          <div class="carousel-caption d-none d-md-block text-white" class="img-content2">
+            <h2 style="color:black;">Latest mobiles</h2>
+            <p style="color:black;">
+              Iphones, Redmi,Samsung and many more<b><s>10%</s></b>
+            </p>
+            <div style="color:black;"><pre>15% Off</pre></div>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <img
+            src="https://i.ibb.co/sPxCDgd/movie1.jpg"
+            class="d-block w-100"
+            style="height: 600px; font-style: white"
+            alt="..."
+          />
+          <div class="carousel-caption d-none d-md-block text-white">
+            <h1>Amazon Prime</h1>
+            <p>
+              All your favorite movies<b><s>Pay Rs.199/month</s></b>
+            </p>
+            <div><pre> Rs.99/month</pre></div>
+          </div>
+        </div>
+        <div class="carousel-item" class="one">
+          <img
+          src="https://i.ibb.co/kx97wn9/women-s-cloth.png"
+          class="d-block w-100"
+          style="height: 600px; font-style: white"
+          alt="..."
+        />
+          <!--<img
+            src="https://i.ibb.co/0hKsk1R/kurtas.jpg"
+            class="rounded float-start col-md-4 img-responsive"
+            style="height: 600px"
+            alt="..."
+          />
+          <img
+            src="https://i.ibb.co/Qv4qMqq/d3.jpg"
+            class="rounded float-end col-md-4 img-responsive"
+            style="height: 600px"
+            alt="..."
+          />-->
+          <div class="carousel-caption d-none d-md-block text-light">
+            <center>
+              <h1>Dress materials</h1>
+              <p>
+                All Dress materials<b><s>25%</s></b>
+              </p>
+              <div><pre>45%</pre></div>
+            </center>
+          </div>
+        </div>
+      </div>
+      <button
+        class="carousel-control-prev"
+        type="button"
+        data-bs-target="#carouselExampleDark"
+        data-bs-slide="prev"
+      >
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button
+        class="carousel-control-next"
+        type="button"
+        data-bs-target="#carouselExampleDark"
+        data-bs-slide="next"
+      >
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+    
+<!--Cards overlapping the Carousel -->
+    <div class="cards">
+      <div class="card__container" style=" border-radius: 5%">
+        <h4>Cosmetics</h4>
+        <div class="card__inner">
+          <div class="card__item">
+            <p>Face Care</p>
+            <img src="https://i.ibb.co/58CyTMv/cosmetics1.jpg" alt="face" />
+          </div>
+          <div class="card__item">
+            <p>Eye Care</p>
+            <img src="https://i.ibb.co/2Y6Vyxc/cosmetics2.jpg" alt="face" />
+          </div>
+          <div class="card__item">
+            <p>Hair Care</p>
+            <img src="https://i.ibb.co/JxWBYCc/cosmetics4.jpg" alt="face" />
+          </div>
+          <div class="card__item">
+            <p>Lip Care</p>
+            <img src="https://i.ibb.co/x53CRdQ/cosmetics3.jpg" alt="face" />
+          </div>
+        </div>
+      </div>
+
+      <div class="card__container" style=" border-radius: 5%">
+        <h4>Gift Items</h4>
+        <div class="card__inner">
+          <div class="card__item">
+            <p>Men Gifts</p>
+            <img src="https://i.ibb.co/gjxjsTJ/mengift.jpg" alt="face" />
+          </div>
+          <div class="card__item">
+            <p>Women Gifts</p>
+            <img src="https://i.ibb.co/3z2pN6N/women-gift.jpg" alt="face" />
+          </div>
+          <div class="card__item">
+            <p>Boys gifts</p>
+            <img src="https://i.ibb.co/6BD9PHq/boygift.jpg" alt="face" />
+          </div>
+          <div class="card__item">
+            <p>Girls Gifts</p>
+            <img src="https://i.ibb.co/jJtZDDY/girlgift.jpg" alt="face" />
+          </div>
+        </div>
+      </div>
+      
+      <div class="card__container" style=" border-radius: 5%">
+        <h4>Shoe World</h4>
+        <div class="card__inner">
+          <div class="card__item">
+            <p>Slippers</p>
+            <img src="https://i.ibb.co/6FY5DWR/shoes1-1.jpg" alt="face" />
+          </div>
+          <div class="card__item">
+            <p>Sports shoes</p>
+            <img src="https://i.ibb.co/0sYpDCb/shoe2.jpg" alt="face" />
+          </div>
+          <div class="card__item">
+            <p>Crocs</p>
+            <img src="https://i.ibb.co/Q9qg9tS/shoe3.jpg" alt="face" />
+          </div>
+          <div class="card__item">
+            <p>Formal shoes</p>
+            <img src="https://i.ibb.co/YRx4d3p/shoe4s.jpg" alt="face" />
+          </div>
+        </div>
+      </div>
+      <div class="card__container" style=" border-radius: 5%">
+        <h4>Watch Zone</h4>
+        <div class="card__inner">
+          <div class="card__item">
+            <p>Gents watches</p>
+            <img src="https://i.ibb.co/5vNRdFM/gents-watch.jpg" alt="face"/>
+          </div>
+          <div class="card__item">
+            <p>Smart Watches</p>
+            <img src="https://i.ibb.co/SBmPQbS/smart-watches.jpg" alt="face"/>
+          </div>
+          <div class="card__item">
+            <p>Ladies Watches</p>
+            <img src="https://i.ibb.co/7vzGH8B/ladies-watch1.jpg" alt="face"/>
+          </div>
+          <div class="card__item">
+            <p>Elite collections</p>
+            <img src="https://i.ibb.co/GC95pdH/ladies-watch.jpg" alt="face"/>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+    
+<!--Hang bags Flyer-->
+   <div class="p-2 g-7">
+    <div class="class= p-3" style="background-color: rgb(204, 243, 241)">
+      <h4>Bag World!</h4>
+      <img class="image2" src="https://i.ibb.co/pzMQjQj/bag5.jpg" alt="..."/>
+      <img class="image2" src="https://i.ibb.co/ZWX7r0d/bag4.jpg"  alt="..." />
+      <img class="image2" src="https://i.ibb.co/Qct4Ytk/bag2.jpg"  alt="..." />
+      <img class="image2" src="https://i.ibb.co/rvygRWJ/bag3.jpg"   alt="..." />
+      <img class="image2" src="https://i.ibb.co/xXb4TS2/hb4.jpg"   alt="..." />
+      <img class="image2" src="https://i.ibb.co/ky7bMSp/hb5.jpg"   alt="..." />
+      <img class="image2" src="https://i.ibb.co/Bq795mJ/hb6.jpg"   alt="..." />
+      <a href="#" class="btn btn-primary">Search More!</a>
+    </div>
+  </div> 
+  <br>
+
+<!--Grid-Cards Clothing grid section -->
+    <div class="row row-cols-1 row-cols-md-4 g-5 p-5">
+      <div class="col">
+        <div class="card">
+          <img src="https://i.ibb.co/w4RKRqC/d2.jpg" width="100%" height="200px"class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">Women's Clothing</h5>
+            <p class="card-text"> Branded dresses at low price! </p>
+            <a href="#" class="btn btn-primary">See More!</a>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card">
+          <img src="https://i.ibb.co/34G08cb/men-s-clothing.jpg" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">Men's Clothings</h5>
+            <p class="card-text">20-50% discount!</p>
+            <a href="#" class="btn btn-primary">See More!</a>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card">
+          <img src="https://i.ibb.co/SPt4h7Y/kids-cloths.jpg" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">Kids dresses</h5>
+            <p class="card-text">Beautiful dresses for your kids </p>
+            <a href="#" class="btn btn-primary">See More!</a>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card ">
+          <img src="https://i.ibb.co/RTc585v/party.jpg" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">Party wears</h5>
+            <p class="card-text">Enjoy the season</p>
+            <a href="#" class="btn btn-primary">See More!</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+
+  <!--Footer-->
+  
+  <div class="b-example-divider"></div>
+    <div class="container-float border-top bg-light grey">
+      <footer class="py-7">
+        <div class="row">
+          <div class="col-2">
+            <h5>Section</h5>
+            <ul class="nav flex-column">
+              <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
+              <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
+              <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
+              <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
+              <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
+            </ul>
+          </div>
+    
+          <div class="col-2">
+            <h5>Section</h5>
+            <ul class="nav flex-column">
+              <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
+              <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
+              <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
+              <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
+              <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
+            </ul>
+          </div>
+    
+          <div class="col-2">
+            <h5>Section</h5>
+            <ul class="nav flex-column">
+              <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
+              <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
+              <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
+              <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
+              <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
+            </ul>
+          </div>
+    
+          <div class="col-4 offset-1">
+            <form>
+              <h5>Subscribe to our newsletter</h5>
+              <p>Monthly digest of whats new and exciting from us.</p>
+              <div class="d-flex w-100 gap-2">
+                <label for="newsletter1" class="visually-hidden">Email address</label>
+                <input id="newsletter1" type="text" class="form-control" placeholder="Email address">
+                <button class="btn btn-primary" type="button">Subscribe</button>
+              </div>
+            </form>
+          </div>
+        </div>
+    
+        <div class="d-flex justify-content-between py-4 my-4 border-top">
+          <p>© 2021 Company, Inc. All rights reserved.</p>
+          <ul class="list-unstyled d-flex">
+            <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#twitter"></use></svg></a></li>
+            <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#instagram"></use></svg></a></li>
+            <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#facebook"></use></svg></a></li>
+          </ul>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>
+
+    
+
