@@ -94,12 +94,13 @@
   }
   
   .text{
-    
-    justify-content: center;
-    display:flex;
-    
-    
-  }
+      position: relative;
+      width: 55%;
+      left: 530px;
+      top: 240px;
+      height: 100px;
+    }
+   
   /* .cards {
     display: flex;
     gap: 10px;
