@@ -93,6 +93,13 @@
     width: 100%;
   }
   
+  .text{
+    
+    justify-content: center;
+    display:flex;
+    
+    
+  }
   /* .cards {
     display: flex;
     gap: 10px;
